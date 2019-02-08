@@ -7,7 +7,7 @@ module.exports = {
     },
 
     insert: (student) => {
-    null
+    return db('students').insert(student)
     },
 
     getStudentById: (id) => {

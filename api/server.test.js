@@ -2,13 +2,40 @@ const request = require('supertest');
 const server = require('./server');
 
 
+describe('Server Testing response', () => {
 
-describe('The route handlers exist', () => {
-
-    it('gets a repsponse', async () => {
+    //Validates we get a response from the server
+    it('gets server response', async () => {
         const response = await request(server).get('/')
         expect(response.status).toBe(200);
+    })
+
+    // Validates we are reciving a json information from the server
+    it('gets a response server is using json', async () => {
+        const response = await request(server).get('/')
+        expect(response.type).toMatch(/json/i);
+    })
+
+    // Validates that we are actual getting a reponse from the body from the request
+    it('test if we get a response from the body', async () => {
+        const response = await request(server).get('/')
+        expect(response.body).toEqual({api: 'up'})
+    })
+
 })
+
+// Database Enpoint testing
+describe('Database testing repsonse', () => {
+
+
+//Validates we are reponding with the right students  and get a 201 as a reponse.
+    it('responds with 201 when body is correct', async () => {
+        const body = {
+            first_name: 'Archie', last_name: 'Andrews'
+        }
+        const response = await request(server).get('/students');
+        expect(response.status).toBe(201);
+    })
 
 
 
