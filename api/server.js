@@ -13,6 +13,7 @@ server.get('/', async (req, res) => {
 })
 
 server.get('/students', async (req, res) => {
+
     const rows = await students.get();
     res.status(201).json(rows);
 })

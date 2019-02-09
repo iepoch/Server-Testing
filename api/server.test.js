@@ -30,12 +30,36 @@ describe('Database testing repsonse', () => {
 
 //Validates we are reponding with the right students  and get a 201 as a reponse.
     it('responds with 201 when body is correct', async () => {
-        const body = {
-            first_name: 'Archie', last_name: 'Andrews'
-        }
         const response = await request(server).get('/students');
         expect(response.status).toBe(201);
+        expect(response.body).toEqual([
+            {
+                id: 1,
+                first_name: "Archie",
+                last_name: "Andrews"
+            },
+            {
+                id: 2,
+                first_name: "Jughead",
+                last_name: "Jones"
+            },
+            {
+                id: 3,
+                first_name: "Betty",
+                last_name: "Cooper"
+            },
+            {
+                id: 4,
+                first_name: "Veronica",
+                last_name: "Lodge"
+            }
+
+        ]);
+
     })
+
+
+
 
 
 
